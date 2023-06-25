@@ -15,8 +15,8 @@
 8. Estimating Depth
 
 <div align="center">
-  <img src= "https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/c427738e-fb8c-4129-85f2-85dce87d4910" width="700" height="370"/>
-  <p><b> Fig 1. Illustration of several grouping principles. Common fate is a principle of Gestalt psychology that refers to the perceptual grouping of object </b></p>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/96c7a839-e841-429a-9192-fabfe656b017" width="700" height="370"/>
+  <p><b> Fig 1. Forward Imaging Model: 3D to 2D </b></p>
 </div>
 
 
