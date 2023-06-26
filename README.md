@@ -194,28 +194,43 @@ We then have a ```3 x 4``` matrix called the **Projection Matrix**:
 Hence, if we wish to calibrate the camera, all we need to know is the **projection matrix**.  We can then go from any point in 3D to its projection in pixels in the image.
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/6b1b9d46-2714-48c8-8c32-ada400a17f73 width="500" height="360"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/6b1b9d46-2714-48c8-8c32-ada400a17f73 width="550" height="400"/>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-![download](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/ef279136-0334-4240-95e1-01a1e0919b77)
 
 ----
 
 ## 2. Intrinsic and Extrinsic Parameters
+By employing our calibration method, we are able to achieve a precise estimation of the projection matrix. we can also go beyond this step by decomposing the projection matrix into its constituent parts: the ```intrinsic matrix```, encompassing all ```internal parameters```, and the ```extrinsic matrix```, which captures the ```external parameters``` of the camera.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/e9586b9d-b047-48ba-83df-7efaebb6e4eb"/>
+</div>
+
+Now if we check how we get the first 3 columns of the projection matrix, we get it by multiplying the **calibration matrix, K** with the **rotation matrix, R**. Note that ```K``` is an **upper-right triangular matrix** and ```R``` is an **orthonormal matrix**, hence, it is possible to uniquely "decouple" ```K``` and ```R``` from their product using ```QR factorization method```.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/9341dfd1-78c5-497b-8fc4-ef6349a906f6"/>
+</div>
+
+Similarly, to get the last column of the projection matrix, we multiply the **calibration matrix, K** with the **translation vector, t**:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/641e8fd9-1e3c-4413-a882-cb2d9c673eed"/>
+</div>
+
+Therefore:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/65b24c60-18cb-4d4b-bbc0-d2190822dfca"/>
+</div>
+
+
+Note that pinholes do not exhibit distortions but lenses do. We may encounter **radial** or **tangential** distortion and these are non-linear effects. And in order to take care of these, we need to incorporate the distortion coefficients in our intrinsic model.
+
+--------------- 
+
+## 3. Simple Stereo
 
 
 
@@ -226,6 +241,10 @@ Hence, if we wish to calibrate the camera, all we need to know is the **projecti
 
 
 
+------------
+
+
+--![download](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/ef279136-0334-4240-95e1-01a1e0919b77)
 
 
 ----------
