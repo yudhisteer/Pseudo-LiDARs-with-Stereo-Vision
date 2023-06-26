@@ -73,6 +73,63 @@ We re-write the equation above whereby ![CodeCogsEqn (28)](https://github.com/yu
 #### 1.1.2 Homogeneous Coordinates
 We need to go from a ```non-linear``` model to a ```linear``` model and we will use homogeneous coordinates to do so. we will transform ```(u,v)``` from **pixel** coordinates to **homogeneous** coordinates.
 
+The homogeneous representation of a 2D point ![CodeCogsEqn (30)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/bc650530-723c-4079-aa4e-818cf5969bcf)
+ is a 3D point ![CodeCogsEqn (42)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/9651d451-3d53-45b8-8ecb-60a980aed781). The third coordinate ![CodeCogsEqn (32)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/99821523-c643-4c47-8fd2-94613d385fa0) is fictitious.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/115f60f7-7241-49a6-8537-639fad347513"/>
+</div>
+
+Similarly, we multiply the equation below by ![CodeCogsEqn (35)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/ac370ee0-77e7-4cf5-b535-d62e8d6fdbc9)
+: 
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/197455fb-61f5-425f-a621-2264b2fe7d19"/>
+</div>
+
+We now have a ```3 x 4``` matrix which contains all the internal parameters of the camera multiplied by the homogeneous coordinates of the 3-dimensional point ```P``` defined in the camera coordinate frame. This gives us a **Linear Model for Perspective Projection**.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/901ba416-c4b5-495b-a89c-989eddb64572"/>
+</div>
+
+Note that this ```3 x 4``` matrix is called the **Intrinsic Matrix**:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1b88da02-8d8e-4551-aebb-684bd690e069"/>
+</div>
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/0fa18ea9-e340-4e3d-af4e-8a42f31803e1"/>
+</div>
+
+Its structure is an upper-right triangular matrix which we can separate as ```K```:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/2bd8d169-e94e-4e2d-ba2f-45c7bf783d19"/>
+</div>
+
+Hence, we have ![CodeCogsEqn (40)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/8ebfebd3-fbd1-4b9f-92d1-30af6daf694d) that takes us from the homogeneous coordinate representation of a point in the camera coordinate frame 3D to its pixel coordinates in the image, ![CodeCogsEqn (41)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/e05c6a7e-5d8c-42d6-a6e3-348da8319c63).
+
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/72659965-e977-4ff7-8290-7ecb46eef247"/>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
