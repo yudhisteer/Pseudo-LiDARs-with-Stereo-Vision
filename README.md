@@ -24,7 +24,6 @@ In the image below, we have a point ```P``` in the world coordinates ```W``` and
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/96c7a839-e841-429a-9192-fabfe656b017" width="700" height="370"/>
-
 </div>
 
 
@@ -34,20 +33,45 @@ In the image below, we have a point ```P``` in the world coordinates ```W``` and
 </div>
 
 ### 1.1 Mapping of Camera Coordinates to Image Coordinates (3D to 2D)
+
+#### 1.1.1 Image Plane to Image Sensor Mapping
 We assume that the point has been defined in the camera coordinate frame and using ```perspective projection equations```:
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/195b17d0-f6a1-4d0b-aec7-457eeec1cbe4)"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/195b17d0-f6a1-4d0b-aec7-457eeec1cbe4"/>
 </div>
 
 ![CodeCogsEqn (20)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/2b5022c1-da9c-4d7d-a9fd-5d89a713289b) and ![CodeCogsEqn (21)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1e908801-21a5-4b72-8150-cdcb2583f51a) are the coordinates of point ```P``` onto the image plane and ```f``` is the focal length which is the distance between the Centre of Projection (COP) and the image plane of the camera.
 
+We have assumed we know the coordinates of the image plane in terms of **millimeters (mm)** which is the same unit in the camera coordinate frame. However, in reality we have an image sensor whose units are **pixels (px)**. Hence, we need to convert our coordinate of ```P``` from mm to pixel coordinates using **pixel densities (pixels/mm)**.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/13dd200d-7179-40f3-bf80-a649ca5b3a03"/>
+</div>
+
+![CodeCogsEqn (25)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/60822e05-06af-4160-a1be-3f218e96a368) and ![CodeCogsEqn (26)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/b737884c-7f5e-478e-b37c-73afeb946a44) are the pixel densities (px/mm) in the x and y directions respectively.
+
+Since now we treated the midpoint of the image plane as the origin but generally, we treat the top-left corner as the origin of the image sensor. ![CodeCogsEqn (27)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/41a107b2-ac17-4cf1-8a35-bb51c6fe956a) is the **Principle Point** where the optical axis pierces the sensor.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/47bc0e6e-499e-4944-8376-357fb53e094c"/>
+</div>
+
+We re-write the equation above whereby ![CodeCogsEqn (28)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d117f243-d85a-4c38-9c46-9781769e3440) are the focal lengths in pixels in the x and y directions:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/197455fb-61f5-425f-a621-2264b2fe7d19"/>
+</div>
 
 
+- ![CodeCogsEqn (29)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/0e376ffc-6c75-4d15-98d3-c80b3370f17c): **Intrinsic parameters** of the camera.
+- They represent the camera's **internal geometry**.
+- The equation tells us that objects **farther** away appear **smaller** in the image.
+- ```(u,v)``` are **non-linear models** as we are dividing by ```z```.
 
 
-
-
+#### 1.1.2 Homogeneous Coordinates
+We need to go from a non-linear model to a linear model and we will use homogeneous coordinates to do so.
 
 
 
