@@ -158,33 +158,44 @@ And this is how we transformed a point from the world coordinates frame to the c
 </div>
 
 #### 1.2.1 Projection Matrix
-
-
-
-<div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/6b1b9d46-2714-48c8-8c32-ada400a17f73 width="500" height="360"/>
-</div>
-
-
-<div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/989813d9-d3c1-4d90-9bac-2e34ef19ce56"/>
-</div>
-
+We now have our mapping from world to camera using the **Extrinsic Matrix**:
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/fea92f0b-8ab1-4923-94c5-7c609d59d604"/>
 </div>
 
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/18d8151a-50f1-4e40-9b48-f70e21ee372a"/>
+</div>
+
+
+And the mapping of the camera to the image using the **Intrinsic Matrix**:
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1e1d4331-d24c-4ca3-8153-41960e256970"/>
 </div>
 
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/cb2f8275-4b8c-40a4-bfed-efad3733f419"/>
+</div>
+
+Therefore, we can combine these two to get a direct mapping from a point in the world coordinate frame to a pixel location in the image:
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/4e2ba08a-70f5-4008-9d14-80190dfef2aa"/>
 </div>
 
+We then have a ```3 x 4``` matrix called the **Projection Matrix**:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/989813d9-d3c1-4d90-9bac-2e34ef19ce56"/>
+</div>
+
+Hence, if we wish to calibrate the camera, all we need to know is the **projection matrix**.  We can then go from any point in 3D to its projection in pixels in the image.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/6b1b9d46-2714-48c8-8c32-ada400a17f73 width="500" height="360"/>
+</div>
 
 
 
