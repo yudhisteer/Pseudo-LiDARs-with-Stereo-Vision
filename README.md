@@ -157,23 +157,33 @@ And this is how we transformed a point from the world coordinates frame to the c
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/54d6c234-cfe4-461a-a135-ba914b2f98af"/>
 </div>
 
+#### 1.2.1 Projection Matrix
+
+
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/c75fb9f1-e23d-4bd1-9c03-e822848dfb8b" width="500" height="360"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/6b1b9d46-2714-48c8-8c32-ada400a17f73 width="500" height="360"/>
 </div>
 
 
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/989813d9-d3c1-4d90-9bac-2e34ef19ce56"/>
+</div>
 
 
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/fea92f0b-8ab1-4923-94c5-7c609d59d604"/>
+</div>
 
 
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1e1d4331-d24c-4ca3-8153-41960e256970"/>
+</div>
 
 
-
-
-
-
-
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/4e2ba08a-70f5-4008-9d14-80190dfef2aa"/>
+</div>
 
 
 
