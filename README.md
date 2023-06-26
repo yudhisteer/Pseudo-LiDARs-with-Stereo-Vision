@@ -159,7 +159,7 @@ And this is how we transformed a point from the world coordinates frame to the c
 
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/c75fb9f1-e23d-4bd1-9c03-e822848dfb8b" width="500" height="350"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/c75fb9f1-e23d-4bd1-9c03-e822848dfb8b" width="500" height="360"/>
 </div>
 
 
