@@ -117,23 +117,67 @@ Hence, we have ![CodeCogsEqn (40)](https://github.com/yudhisteer/Pseudo-LiDARs-a
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### 1.2 Mapping of World Coordinates to Camera Coordinates (3D to 3D)
+Now we need the mapping of a point from the ```world``` coordinates to the ```camera``` coordinates: 3D to 3D. That can be done by using the **position**, ![CodeCogsEqn (43)](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/6675c7ec-7b20-428e-9ff7-c7379dfe3c79)
+ and **orientation**, ```R```,  of the camera coordinate frame. The position and orientation of the camera in the world coordinate frame ```W``` are the camera's **Extrinsic Parameters**.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/562e5971-3a82-4f01-a0fb-9670d6d00b77" width="450" height="300"/>
+</div>
+
+Orientation or Rotation matrix R is **orthonormal**: 
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/e4ec7ec5-bd8d-4027-ba64-4a72b36c4e81"/>
+</div>
+
+
+If we now map ```P``` from the word coordinate frame to the camera coordinate frame **rotation** matrix ```R``` and **translation** matrix ```t```:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/c962e766-1733-44d8-91cd-72ca44ef3c75"/>
+</div>
+
+
+We can write the equation above using homogeneous coordinates:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/61909c55-d3f6-4982-abb5-12ef7b72236a"/>
+</div>
+
+The **Extrinsic Matrix** is the ```4 x 4``` matrix:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/bb7c227e-5fc3-4cc0-95d2-410099431e2c"/>
+</div>
+
+And this is how we transformed a point from the world coordinates frame to the camera coordinates frame:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/54d6c234-cfe4-461a-a135-ba914b2f98af"/>
+</div>
+
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/c75fb9f1-e23d-4bd1-9c03-e822848dfb8b" width="500" height="350"/>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
