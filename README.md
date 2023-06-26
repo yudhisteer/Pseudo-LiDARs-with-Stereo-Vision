@@ -71,7 +71,7 @@ We re-write the equation above whereby ![CodeCogsEqn (28)](https://github.com/yu
 
 
 #### 1.1.2 Homogeneous Coordinates
-We need to go from a non-linear model to a linear model and we will use homogeneous coordinates to do so.
+We need to go from a ```non-linear``` model to a ```linear``` model and we will use homogeneous coordinates to do so. we will transform ```(u,v)``` from **pixel** coordinates to **homogeneous** coordinates.
 
 
 
