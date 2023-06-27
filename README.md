@@ -270,7 +270,7 @@ As mentioned before, we do NOT have disparity in the vertical direction, which m
 
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/8e28bea4-4292-4024-ab50-4d7255d75ccb" width="750" height="280"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/079b502a-8779-46b9-b317-9b34e615393b" width="780" height="480"/>
 </div>
 
 - We use the window ```T``` as a template and match it with all the windows along the same scan line ```L``` in the right image.
