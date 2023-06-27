@@ -8,11 +8,7 @@
 1. Linear Camera Model
 2. Intrinsic and Extrinsic Parameters
 3. Simple Stereo
-4. Uncalibrated Stereo
-5. Epipolar Geometry
-6. Fundamental Matrix
-7. Correspondences
-8. Estimating Depth
+4. Application of Simple Stereo
 
 
 ------------------
@@ -296,7 +292,9 @@ In order to get a good stereo matching, we want to avoid the following:
 
 
 
+-------------
 
+## 4. Application of Simple Stereo
 
 
 
