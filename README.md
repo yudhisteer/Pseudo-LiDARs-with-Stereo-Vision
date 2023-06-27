@@ -267,16 +267,37 @@ Notice that the position of the point in the vertical direction of the image pla
 
 ### 3.1 Stereo Matching
 
+Since now we have assumed we know where a point of the left image lands on the right image. That is, we assumed we knew the **correspondence** between points in the left and right image.
+Now we need to find that correspondence and that is called **stereo matching**.
+
+As mentioned before, we do NOT have disparity in the vertical direction, which means that the corresponding points must lie on the same ```horizontal line``` in both images. Hence, our search is ```1D``` and we can use ```template matching``` to find the corresponding point in the right image.
+
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/8e28bea4-4292-4024-ab50-4d7255d75ccb" width="750" height="280"/>
+</div>
+
+- We use the window ```T``` as a template and match it with all the windows along the same scan line ```L``` in the right image.
+- The point where it matches best is the match.
+- That point is the correspondence that we use to estimate disparity.
+
+Now we want to know how big the window ```T``` should be:
+- If the window is very small, we may get good localization but high-sensitivity noise. The smaller the window, the less descriptive the pattern is.
+- If we use a large window, we may get more robust matches in terms of depth of values but the disparity map is going to be more blurred: poor localization.
+- Another method could be to use the adaptive window method: For each point, we match points using windows of multiple sizes and use the disparity that is a result of the best similarity measure.
+
+### 3.2 Issues with Stereo Matching
 
 
 
 
 
-------------
 
 
---![download](https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/ef279136-0334-4240-95e1-01a1e0919b77)
 
+
+
+  
 
 ----------
 
