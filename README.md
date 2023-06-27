@@ -282,12 +282,17 @@ As mentioned before, we do NOT have disparity in the vertical direction, which m
 - That point is the correspondence that we use to estimate disparity.
 
 Now we want to know how big the window ```T``` should be:
-- If the window is very small, we may get good localization but high-sensitivity noise. The smaller the window, the less descriptive the pattern is.
-- If we use a large window, we may get more robust matches in terms of depth of values but the disparity map is going to be more blurred: poor localization.
-- Another method could be to use the adaptive window method: For each point, we match points using windows of multiple sizes and use the disparity that is a result of the best similarity measure.
+- If the window is very small, we may get good localization but **high-sensitivity noise**. The smaller the window, the less descriptive the pattern is.
+- If we use a large window, we may get more robust matches in terms of depth of values but the disparity map is going to be more blurred: **poor localization**.
+- Another method could be to use the **adaptive window method**: For each point, we match points using windows of multiple sizes and use the disparity that is a result of the best similarity measure.
 
 ### 3.2 Issues with Stereo Matching
 
+In order to get a good stereo matching, we want to avoid the following:
+
+1. We expect the surface to have **texture**. If we have the image of a smooth wall, then we do not have much texture and if we take a small window ```T``` then we may get many matches between the left and right image.
+2. If we do have texture in our image, then this texture should not be **repetitive**. If we have a repetitive pattern we will get multiple matches in the right image where they are all going to be perfectly good matches.
+3. An inherent problem of stereo matching is **foreshortening** whereby the projected area of our window onto the left image is different from the projected area in the right image. Hence, we are not matching the same brightness patterns but a warped or distorted version of it.
 
 
 
