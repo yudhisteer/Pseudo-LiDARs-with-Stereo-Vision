@@ -265,6 +265,7 @@ Notice that the position of the point in the vertical direction of the image pla
 - **Disparity** is **proportional** to **baseline**, that is, the further apart are the two cameras, the greater the disparity will be.
 - When designing a stereo system, we want to use a stereo configuration where the **baseline is large**, as the larger the baseline, the more precise we can make the disparity measurements.
 
+### 3.1 Stereo Matching
 
 
 
