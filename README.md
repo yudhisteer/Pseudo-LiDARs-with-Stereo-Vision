@@ -273,14 +273,22 @@ As mentioned before, we do NOT have disparity in the vertical direction, which m
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/079b502a-8779-46b9-b317-9b34e615393b" width="780" height="480"/>
 </div>
 
-- We use the window ```T``` as a template and match it with all the windows along the same scan line ```L``` in the right image.
-- The point where it matches best is the match.
+- We use the window ```T``` as a template and match it with all the windows along the same scan line ```L``` in the right image using a similarity metric (e.g., ```sum of absolute differences```, ```sum of squared differences```).
+- The point where it matches best (where the error is lowest) is the match.
 - That point is the correspondence that we use to estimate disparity.
 
 Now we want to know how big the window ```T``` should be:
 - If the window is very small, we may get good localization but **high-sensitivity noise**. The smaller the window, the less descriptive the pattern is.
 - If we use a large window, we may get more robust matches in terms of depth of values but the disparity map is going to be more blurred: **poor localization**.
 - Another method could be to use the **adaptive window method**: For each point, we match points using windows of multiple sizes and use the disparity that is a result of the best similarity measure.
+
+Stereo-matching algorithms can be categorized as either ```local``` or ```global``` methods, depending on how they handle the disparity optimization step. 
+
+- Global methods incorporate a **pairwise smoothness** term in the cost function, which encourages spatial continuity across pixels and consistent assignments along edges. 
+- These global methods generally perform better than local methods in handling object boundaries and resolving ambiguous matches.
+- Global optimization problems are often computationally challenging and can be classified as NP-hard.
+- On the other hand, local methods have simpler computations but may struggle with object boundaries and ambiguous matches.
+
 
 ### 3.2 Issues with Stereo Matching
 
@@ -290,9 +298,7 @@ In order to get a good stereo matching, we want to avoid the following:
 2. If we do have texture in our image, then this texture should not be **repetitive**. If we have a repetitive pattern we will get multiple matches in the right image where they are all going to be perfectly good matches.
 3. An inherent problem of stereo matching is **foreshortening** whereby the projected area of our window onto the left image is different from the projected area in the right image. Hence, we are not matching the same brightness patterns but a warped or distorted version of it.
 
-
-
--------------
+------------
 
 ## 4. Application of Simple Stereo
 
@@ -308,4 +314,8 @@ In order to get a good stereo matching, we want to avoid the following:
 1. https://github.com/mileyan/AnyNet
 2. https://github.com/JiaRenChang/PSMNet
 3. https://github.com/autonomousvision/unimatch
-4. 
+4. https://groups.csail.mit.edu/commit/papers/2016/min-zhang-meng-thesis.pdf
+5. https://arxiv.org/abs/1510.05970
+6. https://arxiv.org/pdf/1803.08669.pdf
+7. https://arxiv.org/abs/2203.11483
+8. 
