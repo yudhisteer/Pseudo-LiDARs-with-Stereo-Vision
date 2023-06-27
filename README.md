@@ -231,9 +231,39 @@ Note that pinholes do not exhibit distortions but lenses do. We may encounter **
 --------------- 
 
 ## 3. Simple Stereo
+Now we want to recover r3-dimensional structure of a scene from two images. Before we dive into this, let's ask ourselves, given a calibrated camera, can we find the 3D scene point from a sinple 2D image? The answer is **no**. But we do know that the corresponding 3D point must lie on an ```outgoing ray``` shown in green and given that the camera is calibrated, we know the equation of this ray.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1c804ebb-305a-4b2b-a68a-995f20490f86" width="450" height="300"/>
+</div>
+
+So in order to reconstruct a 3D scene, we need two images captured from two different locations. Below is an example of a stereo camera whereby we have a **left camera** and a **right camera**, and the right camera is simply identical to the left camera but displaced along the horizontal direction by a distance ```b``` called the ```baseline```.
+
+In the image below we have the projection of a scene point in the left camera and the projection of the same point in the right camera. We shoot out two rays from the projected points and wherever those two rays intersect is where the physical point lies corresponding to these two image points. This is called **triangulation** problem.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/29bf4c3a-46e7-4c7f-9b50-c7564da24df5" width="600" height="580"/>
+</div>
+
+Assuming we know the position of the point in the left and right image plane then we have the 2 equations based on the perspective projection equation:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/6ef5d79a-2083-43f1-b161-48a33e7a62f9"/>
+</div>
+
+Notice that the position of the point in the vertical direction of the image plane is the same for both the left and right camera meaning we have **no disparity** in the vertical direction. Hence solving for ```(x,y,z)```:
 
 
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/9eac3a8a-f282-4398-b30c-222c22ae319a"/>
+</div>
 
+- **Disparity** is the **difference** in the u-coordinates of the same scene point in the two images.
+- Using the disparity we can calculate the **depth** ```z``` of the point in the scene.
+- **Depth** ```z``` is **inversely proportional** to the **disparity**. That is, if a point is very close to the camera, it will have a big disparity. On the other hand, if a point is far from the camera, it will have a small disparity.
+- The **disparity** is **zero** if a point is at **infinity**, that is, at infinity a point will have the same exact position on the left and right image plane.
+- **Disparity** is **proportional** to **baseline**, that is, the further apart are the two cameras, the greater the disparity will be.
+- When designing a stereo system, we want to use a stereo configuration where the **baseline is large**, as the larger the baseline, the more precise we can make the disparity measurements.
 
 
 
