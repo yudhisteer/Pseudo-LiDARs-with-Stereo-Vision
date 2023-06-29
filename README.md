@@ -326,3 +326,4 @@ In order to get a good stereo matching, we want to avoid the following:
 12. https://towardsdatascience.com/depth-estimation-1-basics-and-intuition-86f2c9538cd1
 13. https://towardsdatascience.com/uncertainty-in-depth-estimation-c3f04f44f9
 14. https://medium.com/swlh/camera-lidar-projection-navigating-between-2d-and-3d-911c78167a94
+15. https://www.mrt.kit.edu/z/publ/download/2013/GeigerAl2013IJRR.pdf
