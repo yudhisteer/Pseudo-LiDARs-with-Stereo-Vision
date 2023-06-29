@@ -227,7 +227,7 @@ Note that pinholes do not exhibit distortions but lenses do. We may encounter **
 --------------- 
 
 ## 3. Simple Stereo
-Now we want to recover r3-dimensional structure of a scene from two images. Before we dive into this, let's ask ourselves, given a calibrated camera, can we find the 3D scene point from a sinple 2D image? The answer is **no**. But we do know that the corresponding 3D point must lie on an ```outgoing ray``` shown in green and given that the camera is calibrated, we know the equation of this ray.
+Now we want to recover a 3-Dimensional structure of a scene from two images. Before we dive into this, let's ask ourselves, given a calibrated camera, can we find the 3D scene point from a sinple 2D image? The answer is **no**. But we do know that the corresponding 3D point must lie on an ```outgoing ray``` shown in green and given that the camera is calibrated, we know the equation of this ray.
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1c804ebb-305a-4b2b-a68a-995f20490f86" width="450" height="300"/>
@@ -322,6 +322,10 @@ https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/596637
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d5ec731e-192b-4594-80b0-4ec5080de8ee
 
+
+
+
+https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/654c0d91-e491-4daa-aa58-b57f3f16833b
 
 
 
