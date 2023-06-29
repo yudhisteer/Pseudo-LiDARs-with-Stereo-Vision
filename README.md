@@ -302,6 +302,7 @@ In order to get a good stereo matching, we want to avoid the following:
 
 ## 4. Application of Simple Stereo
 
+<img width="579" alt="image" src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/994541de-0959-4fae-ab33-5de84d2e603e">
 
 
 
