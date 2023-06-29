@@ -318,4 +318,6 @@ In order to get a good stereo matching, we want to avoid the following:
 5. https://arxiv.org/abs/1510.05970
 6. https://arxiv.org/pdf/1803.08669.pdf
 7. https://arxiv.org/abs/2203.11483
-8. 
+8. https://www.episci.com/product/swarmsense/
+9. https://skybrush.io/
+10. https://www.modalai.com/
