@@ -322,3 +322,7 @@ In order to get a good stereo matching, we want to avoid the following:
 8. https://www.episci.com/product/swarmsense/
 9. https://skybrush.io/
 10. https://www.modalai.com/
+11. https://github.com/darylclimb/cvml_project/tree/master/projections
+12. https://towardsdatascience.com/depth-estimation-1-basics-and-intuition-86f2c9538cd1
+13. https://towardsdatascience.com/uncertainty-in-depth-estimation-c3f04f44f9
+14. https://medium.com/swlh/camera-lidar-projection-navigating-between-2d-and-3d-911c78167a94
