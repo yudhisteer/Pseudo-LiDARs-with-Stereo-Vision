@@ -539,7 +539,11 @@ Rotation Y: 1.55
 
 ### 4.3 Display Left and Right Images
 
-<img width="644" alt="image" src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/296e30d9-bca9-4190-8376-e7690b69bb8f">
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/296e30d9-bca9-4190-8376-e7690b69bb8f"/>
+</div>
+<img width="438" alt="image" src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/ca56fd06-3c45-441e-b16f-c9b64267981a">
+
 
 
 ### 4.4 Compute Disparity Map
