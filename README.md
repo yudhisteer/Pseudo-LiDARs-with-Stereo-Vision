@@ -303,9 +303,100 @@ In order to get a good stereo matching, we want to avoid the following:
 ------------
 
 ## 4. Application of Simple Stereo
+Now we will try to find the distances of objects using the KITTI Dataset. For that, we first need to know the configuration of the cameras on the autonomous car. Thankfully, we have a  very detailed explanation describing the position and the baseline between the cameras as shown below.
 
-<img width="579" alt="image" src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/994541de-0959-4fae-ab33-5de84d2e603e">
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/994541de-0959-4fae-ab33-5de84d2e603e" width="600" height="280"/>
+</div>
 
+When downloading the dataset for 3D Object Detection, we have the following files:
+
+- **Left Images**
+- **Right Images**
+- **Calibration Data**
+- **Labels**
+
+### 4.1 Extract Projection Matrix
+Below is an example of how the calibration data is. Since we are using left and right color images, we need to extract ```P2``` and ```P3``` to get the projection matrices.
+
+```
+P0: 7.215377000000e+02 0.000000000000e+00 6.095593000000e+02 0.000000000000e+00 0.000000000000e+00 7.215377000000e+02 1.728540000000e+02 0.000000000000e+00 0.000000000000e+00 0.000000000000e+00 1.000000000000e+00 0.000000000000e+00
+P1: 7.215377000000e+02 0.000000000000e+00 6.095593000000e+02 -3.875744000000e+02 0.000000000000e+00 7.215377000000e+02 1.728540000000e+02 0.000000000000e+00 0.000000000000e+00 0.000000000000e+00 1.000000000000e+00 0.000000000000e+00
+P2: 7.215377000000e+02 0.000000000000e+00 6.095593000000e+02 4.485728000000e+01 0.000000000000e+00 7.215377000000e+02 1.728540000000e+02 2.163791000000e-01 0.000000000000e+00 0.000000000000e+00 1.000000000000e+00 2.745884000000e-03
+P3: 7.215377000000e+02 0.000000000000e+00 6.095593000000e+02 -3.395242000000e+02 0.000000000000e+00 7.215377000000e+02 1.728540000000e+02 2.199936000000e+00 0.000000000000e+00 0.000000000000e+00 1.000000000000e+00 2.729905000000e-03
+R0_rect: 9.999239000000e-01 9.837760000000e-03 -7.445048000000e-03 -9.869795000000e-03 9.999421000000e-01 -4.278459000000e-03 7.402527000000e-03 4.351614000000e-03 9.999631000000e-01
+Tr_velo_to_cam: 7.533745000000e-03 -9.999714000000e-01 -6.166020000000e-04 -4.069766000000e-03 1.480249000000e-02 7.280733000000e-04 -9.998902000000e-01 -7.631618000000e-02 9.998621000000e-01 7.523790000000e-03 1.480755000000e-02 -2.717806000000e-01
+Tr_imu_to_velo: 9.999976000000e-01 7.553071000000e-04 -2.035826000000e-03 -8.086759000000e-01 -7.854027000000e-04 9.998898000000e-01 -1.482298000000e-02 3.195559000000e-01 2.024406000000e-03 1.482454000000e-02 9.998881000000e-01 -7.997231000000e-01
+```
+Note that we get a left and right projection matrix:
+
+```
+Left P Matrix
+[[     721.54           0      609.56      44.857]
+ [          0      721.54      172.85     0.21638]
+ [          0           0           1   0.0027459]]
+
+Right P Matrix
+[[     721.54           0      609.56     -339.52]
+ [          0      721.54      172.85      2.1999]
+ [          0           0           1   0.0027299]]
+
+RO to Rect Matrix
+[[    0.99992   0.0098378   -0.007445]
+ [ -0.0098698     0.99994  -0.0042785]
+ [  0.0074025   0.0043516     0.99996]]
+
+Velodyne to Camera Matrix
+[[  0.0075337    -0.99997  -0.0006166  -0.0040698]
+ [   0.014802  0.00072807    -0.99989   -0.076316]
+ [    0.99986   0.0075238    0.014808    -0.27178]]
+
+IMU to Velodyne Matrix
+[[          1  0.00075531  -0.0020358    -0.80868]
+ [ -0.0007854     0.99989   -0.014823     0.31956]
+ [  0.0020244    0.014825     0.99989    -0.79972]]
+```
+Next
+
+```python
+def decompose_projection_matrix(projection_matrix):
+    """
+    Decompose a projection matrix into camera matrix, rotation matrix, and translation vector.
+
+    Args:
+        projection_matrix (numpy.ndarray): 3x4 projection matrix.
+
+    Returns:
+        tuple: Tuple containing the decomposed components:
+            - camera_matrix (numpy.ndarray): Camera matrix. [ fx   0   cx ]
+                                                            [  0  fy   cy ]
+                                                            [  0   0    1 ]
+            - rotation_matrix (numpy.ndarray): Rotation matrix.
+            - translation_vector (numpy.ndarray): Translation vector.
+    """
+
+    # Decompose the projection matrix
+    camera_matrix, rotation_matrix, translation_vector, _, _, _, _ = cv2.decomposeProjectionMatrix(projection_matrix)
+    translation_vector = translation_vector/translation_vector[3]
+    # Return the decomposed components
+    return camera_matrix, rotation_matrix, translation_vector
+```
+
+### 4.2 Extract Labels
+
+
+### 4.3 Display Left and Right Images
+
+
+### 4.4 Compute Disparity Map
+
+
+
+### 4.5 Compute Depth Map
+
+### 4.6 Object Detection
+
+### 4.7 Stereo Vision with Object Detection
 
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1f402ee7-fa2c-45ba-90d7-4be6de7ca684
