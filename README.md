@@ -666,9 +666,6 @@ https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/596637
 ### 4.7 Stereo Vision with Object Detection
 
 
-https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1f402ee7-fa2c-45ba-90d7-4be6de7ca684
-
-
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/f10614c9-8441-4789-b6dd-87c9be27d74c
 
