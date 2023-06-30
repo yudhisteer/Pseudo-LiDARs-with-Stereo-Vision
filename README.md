@@ -713,7 +713,7 @@ We decide to detect ```cars```, ```persons```, and ```bicycles``` only.
 
 
 
-### 4.7 Stereo Vision with Object Detection
+### 4.7 Distances with Object Detection
 Since now we have the bounding box coordinates and the depth map for each frame, we can use two pieces of data and extract the depth of each obstacle. We can the center of an obstacle by indexing the depth map using the center of the bounding boxes.
 
 ```python
