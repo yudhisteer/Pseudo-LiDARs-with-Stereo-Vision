@@ -657,16 +657,200 @@ Though we will not use the image of the depth map directly, we will use it to ge
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1f402ee7-fa2c-45ba-90d7-4be6de7ca684
 
 ### 4.6 Object Detection
+The next step is to use ```YOLOv8``` to detect objects in our frames. We want to get the coordinates of the bounding boxes
+
+```python
+def get_bounding_box_center_frame(frame, model, names, object_class, show_output=True):
+
+    bbox_coordinates = []
+    frame_copy = frame.copy()
+
+    # Perform object detection on the input frame using the specified model
+    results = model(frame)
+
+    # Iterate over the results of object detection
+    for result in results:
+
+        # Iterate over each bounding box detected in the result
+        for r in result.boxes.data.tolist():
+            # Extract the coordinates, score, and class ID from the bounding box
+            x1, y1, x2, y2, score, class_id = r
+            x1 = int(x1)
+            x2 = int(x2)
+            y1 = int(y1)
+            y2 = int(y2)
+
+            # Get the class name based on the class ID
+            class_name = names.get(class_id)
 
 
+            # Check if the class name matches the specified object_class and the detection score is above a threshold
+            if class_name in object_class  and score > 0.5:
+                bbox_coordinates.append([x1, y1, x2, y2])
+
+                # Draw bounding box on the frame
+                cv2.rectangle(frame_copy, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
 
+    if show_output:
+        # Convert frame from BGR to RGB
+        frame_rgb = cv2.cvtColor(frame_copy, cv2.COLOR_BGR2RGB)
+        # Show the output frame with bounding boxes
+        cv2.imshow("Output", frame_rgb)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
+
+    # Return the list of center coordinates
+    return bbox_coordinates
+```
+
+We decide to detect ```cars```, ```persons```, and ```bicycles``` only.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/8b41ee45-40fc-4bc7-a0e7-1b7c83854080" width=750" height="250"/>
+</div>
 
 
 
 ### 4.7 Stereo Vision with Object Detection
+Since now we have the bounding box coordinates and the depth map for each frame, we can use two pieces of data and extract the depth of each obstacle. We can the center of an obstacle by indexing the depth map using the center of the bounding boxes.
 
+```python
+def calculate_distance(bbox_coordinates, frame, depth_map, disparity_map, show_output=True):
+    frame_copy = frame.copy()
+
+    # Normalize the disparity map to [0, 255]
+    disparity_map_normalized = cv2.normalize(disparity_map, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
+
+    # Apply a colorful colormap to the disparity map
+    colormap = cv2.COLORMAP_JET
+    disparity_map_colored = cv2.applyColorMap(disparity_map_normalized, colormap)
+
+    # Normalize the depth map to [0, 255]
+    depth_map_normalized = cv2.normalize(depth_map, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
+
+    # Apply a colorful colormap to the depth map
+    colormap = cv2.COLORMAP_BONE
+    depth_map_colored = cv2.applyColorMap(depth_map_normalized, colormap)
+
+    for bbox_coor in bbox_coordinates:
+        x1, y1, x2, y2 = bbox_coor
+        center_x = (x1 + x2) // 2
+        center_y = (y1 + y2) // 2
+
+        distance = depth_map[center_y][center_x]
+        print("Calculated distance:", distance)
+
+        # Convert distance to string
+        distance_str = f"{distance:.2f} m"
+
+        # Draw bounding box on the frame
+        cv2.rectangle(frame_copy, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+        # Draw bounding box on the frame
+        cv2.rectangle(disparity_map_colored, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+        # Draw bounding box on the frame
+        cv2.rectangle(depth_map_colored, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+        # Calculate the text size
+        text_size, _ = cv2.getTextSize(distance_str, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 2)
+
+        # Calculate the position for placing the text
+        text_x = center_x - text_size[0] // 2
+        text_y = y1 - 10  # Place the text slightly above the bounding box
+
+        # Calculate the rectangle coordinates
+        rect_x1 = text_x - 5
+        rect_y1 = text_y - text_size[1] - 5
+        rect_x2 = text_x + text_size[0] + 5
+        rect_y2 = text_y + 5
+
+        # Draw white rectangle behind the text
+        cv2.rectangle(frame_copy, (rect_x1, rect_y1), (rect_x2, rect_y2), (255, 255, 255), cv2.FILLED)
+
+        # Put text at the center of the bounding box
+        cv2.putText(frame_copy, distance_str, (text_x, text_y),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+
+        # Draw white rectangle behind the text
+        cv2.rectangle(disparity_map_colored, (rect_x1, rect_y1), (rect_x2, rect_y2), (255, 255, 255), cv2.FILLED)
+
+        # Put text at the center of the bounding box
+        cv2.putText(disparity_map_colored, distance_str, (text_x, text_y),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+
+        # Draw white rectangle behind the text
+        cv2.rectangle(depth_map_colored, (rect_x1, rect_y1), (rect_x2, rect_y2), (255, 255, 255), cv2.FILLED)
+
+        # Put text at the center of the bounding box
+        cv2.putText(depth_map_colored, distance_str, (text_x, text_y),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+
+
+
+    if show_output:
+        # Convert frame from BGR to RGB
+        #frame_rgb = cv2.cvtColor(frame_copy, cv2.COLOR_BGR2RGB)
+
+        # Show the output frame with bounding boxes
+        cv2.imshow("Output disparity map", disparity_map_colored)
+        cv2.imshow("Output frame", frame_copy)
+        cv2.imshow("Output depth map", depth_map_colored)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    return disparity_map_colored, frame_copy, depth_map_colored
+```
+We drew the bounding boxes and the distance of the objects from the camera is displayed on top in meters.
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d5443417-552d-46cd-8fe4-2ea55146507b" width=750" height="550"/>
+</div>
+
+
+
+
+### 4.8 Pipeline
+
+Finally, we want to create a ```pipeline``` function whereby we take in all the left and right images, calculate the disparity, create a depth map, run an object detection and display the distances with their bounding boxes.
+
+```python
+def pipeline(left_image, right_image, object_class):
+    """
+    Performs a pipeline of operations on stereo images to obtain a colored disparity map, RGB frame, and colored depth map.
+
+    Input:
+    - left_image: Left stereo image (RGB format)
+    - right_image: Right stereo image (RGB format)
+    - object_class: List of object classes of interest for bounding box retrieval
+
+    Output:
+    - disparity_map_colored: Colored disparity map (RGB format)
+    - frame_rgb: RGB frame
+    - depth_map_colored: Colored depth map (RGB format)
+    """
+    global focal_length
+
+    # Calculate the disparity map
+    disparity_map = compute_disparity(left_image, right_image, num_disparities=90, block_size=5, window_size=5,
+                                      matcher="stereo_sgbm", show_disparity=False)
+
+    # Calculate the depth map
+    depth_map = calculate_depth_map(disparity_map, baseline, focal_length, show_depth_map=False)
+
+    # Get bounding box coordinates for specified object classes
+    bbox_coordinates = get_bounding_box_center_frame(left_image, model, names, object_class, show_output=False)
+
+    # Calculate colored disparity map, RGB frame, and colored depth map
+    disparity_map_colored, frame_rgb, depth_map_colored = calculate_distance(bbox_coordinates, left_image, depth_map, disparity_map, show_output=False)
+
+    return disparity_map_colored, frame_rgb, depth_map_colored
+
+```
+
+Below are these results:
 
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/f10614c9-8441-4789-b6dd-87c9be27d74c
