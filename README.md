@@ -539,26 +539,68 @@ Rotation Y: 1.55
 
 ### 4.3 Display Left and Right Images
 
+We start by displaying the right and left images of the KITTI dataset. Note that since the baseline is ```54 cm``` which is quite large compared to the OAK-D stereo cameras, we will have a greater disparity hence, it will be more accurate to calculate the depth map.
+
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/296e30d9-bca9-4190-8376-e7690b69bb8f"/>
 </div>
 
 
 
-
-
 ### 4.4 Compute Disparity Map
 
-<div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/bb3a6e01-b584-4c8b-b62c-fb3c09877c51"/>
-</div>
+Next, we will use OpenCV's Block Matching function (```StereoBM_create```) and Semi-Global Block Matching function (```StereoSGBM_create```) to calculate the disparity. We will need to fine-tune some parameters: ```num_disparities```, ```block_size```, and ```window_size```.
+
+```python
+def compute_disparity(left_img, right_img, num_disparities=6 * 16, block_size=11, window_size=6, matcher="stereo_sgbm", show_disparity=True):
+    """
+    Compute the disparity map for a given stereo-image pair.
+
+    Args:
+        image (numpy.ndarray): Left image of the stereo pair.
+        img_pair (numpy.ndarray): Right image of the stereo pair.
+        num_disparities (int): Maximum disparity minus minimum disparity.
+        block_size (int): Size of the block window. It must be an odd number.
+        window_size (int): Size of the disparity smoothness window.
+        matcher (str): Matcher algorithm to use ("stereo_bm" or "stereo_sgbm").
+        show_disparity (bool): Whether to display the disparity map using matplotlib.
+
+    Returns:
+        numpy.ndarray: The computed disparity map.
+    """
+    if matcher == "stereo_bm":
+        # Create a Stereo BM matcher
+        matcher = cv2.StereoBM_create(numDisparities=num_disparities, blockSize=block_size)
+    elif matcher == "stereo_sgbm":
+        # Create a Stereo SGBM matcher
+        matcher = cv2.StereoSGBM_create(
+            minDisparity=0, numDisparities=num_disparities, blockSize=block_size,
+            P1=8 * 3 * window_size ** 2, P2=32 * 3 * window_size ** 2,
+            mode=cv2.STEREO_SGBM_MODE_SGBM_3WAY
+        )
+
+    # Convert the images to grayscale
+    left_gray = cv2.cvtColor(left_img, cv2.COLOR_BGR2GRAY)
+    right_gray = cv2.cvtColor(right_img, cv2.COLOR_BGR2GRAY)
+
+    # Compute the disparity map
+    disparity = matcher.compute(left_gray, right_gray).astype(np.float32) / 16
+
+
+    if show_disparity:
+        # Display the disparity map using matplotlib
+        plt.imshow(disparity, cmap="CMRmap_r") #CMRmap_r # cividis
+        plt.title('Disparity map with SGBM', fontsize=12)
+        plt.show()
+
+    return disparity
+```
+Observe how the disparity using Block Matching is noisier than SGBM. We will use the SGBM algorithm from now on.
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/27d0eb33-9c5c-42b5-bbf4-ac9efdbe0da1"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/bb3a6e01-b584-4c8b-b62c-fb3c09877c51" width="500" height="250"/> 
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/27d0eb33-9c5c-42b5-bbf4-ac9efdbe0da1" width="500" height="250"/>
 </div>
-
-
-
 
 
 
