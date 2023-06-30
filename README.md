@@ -645,23 +645,25 @@ def calculate_depth_map(disparity, baseline, focal_length, show_depth_map=True):
     return depth_map
 ```
 
-Output:
+Our output is a depth map that outputs the depth of each pixel. Though we will not use the image of the depth map directly, we will use it to get the depth of objects using object detection.
+
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/08cfd21b-68ee-4d1e-9f03-8ab48074a052" width=550" height="300"/>
+</div>
+
 
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1f402ee7-fa2c-45ba-90d7-4be6de7ca684
 
-
-
-
-
-
-
-
-
-
-
-
 ### 4.6 Object Detection
+
+
+
+
+
+
+
 
 ### 4.7 Stereo Vision with Object Detection
 
