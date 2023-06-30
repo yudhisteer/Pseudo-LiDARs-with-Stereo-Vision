@@ -605,6 +605,55 @@ Observe how the disparity using Block Matching is noisier than SGBM. We will use
 
 
 ### 4.5 Compute Depth Map
+Next, we will use the disparity map to output a depth map. We will use the equation below:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/751c24e2-6e8b-46af-9672-ec0fcbcd31da"/>
+</div>
+
+We take in the **baseline**, **focal length**, and the **disparity map** in order to calculate the depth of each pixel:
+
+```python
+def calculate_depth_map(disparity, baseline, focal_length, show_depth_map=True):
+    """
+    Calculates the depth map from a given disparity map, baseline, and focal length.
+
+    Args:
+        disparity (numpy.ndarray): Disparity map.
+        baseline (float): Baseline between the cameras.
+        focal_length (float): Focal length of the camera.
+
+    Returns:
+        numpy.ndarray: Depth map.
+    """
+
+    # Replace all instances of 0 and -1 disparity with a small minimum value (to avoid div by 0 or negatives)
+    disparity[disparity == 0] = 0.1
+    disparity[disparity == -1] = 0.1
+
+    # Initialize the depth map to match the size of the disparity map
+    depth_map = np.ones(disparity.shape, np.single)
+
+    # Calculate the depths
+    depth_map[:] = focal_length * baseline / disparity[:]
+
+    if show_depth_map:
+        # Display the disparity map using matplotlib
+        plt.imshow(depth_map, cmap="cividis") #CMRmap_r # cividis
+        plt.show()
+
+    return depth_map
+```
+
+
+
+
+
+
+
+
+
+
 
 ### 4.6 Object Detection
 
