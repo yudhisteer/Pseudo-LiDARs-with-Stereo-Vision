@@ -645,6 +645,12 @@ def calculate_depth_map(disparity, baseline, focal_length, show_depth_map=True):
     return depth_map
 ```
 
+Output:
+
+
+https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1f402ee7-fa2c-45ba-90d7-4be6de7ca684
+
+
 
 
 
