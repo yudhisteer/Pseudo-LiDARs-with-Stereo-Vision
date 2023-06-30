@@ -602,7 +602,7 @@ Observe how the disparity using Block Matching is noisier than SGBM. We will use
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/27d0eb33-9c5c-42b5-bbf4-ac9efdbe0da1" width="450" height="250"/>
 </div>
 
-
+Note that we have a white strip on the left of the images as there are no features to match from the left image to the right image. This depends on the ```block_size``` parameter.
 
 ### 4.5 Compute Depth Map
 Next, we will use the disparity map to output a depth map. We will use the equation below:
@@ -645,14 +645,14 @@ def calculate_depth_map(disparity, baseline, focal_length, show_depth_map=True):
     return depth_map
 ```
 
-Our output is a depth map that outputs the depth of each pixel. Though we will not use the image of the depth map directly, we will use it to get the depth of objects using object detection.
+Our output is a depth map that outputs the depth of each pixel. 
 
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/08cfd21b-68ee-4d1e-9f03-8ab48074a052" width=550" height="300"/>
 </div>
 
-
+Though we will not use the image of the depth map directly, we will use it to get the depth of objects using object detection.
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1f402ee7-fa2c-45ba-90d7-4be6de7ca684
 
