@@ -319,7 +319,7 @@ When downloading the dataset for 3D Object Detection, we have the following file
 ### 4.1 Extract Projection Matrix
 Below is an example of how the calibration data is. Since we are using left and right color images, we need to extract ```P2``` and ```P3``` to get the projection matrices.
 
-```
+```python
 P0: 7.215377000000e+02 0.000000000000e+00 6.095593000000e+02 0.000000000000e+00 0.000000000000e+00 7.215377000000e+02 1.728540000000e+02 0.000000000000e+00 0.000000000000e+00 0.000000000000e+00 1.000000000000e+00 0.000000000000e+00
 P1: 7.215377000000e+02 0.000000000000e+00 6.095593000000e+02 -3.875744000000e+02 0.000000000000e+00 7.215377000000e+02 1.728540000000e+02 0.000000000000e+00 0.000000000000e+00 0.000000000000e+00 1.000000000000e+00 0.000000000000e+00
 P2: 7.215377000000e+02 0.000000000000e+00 6.095593000000e+02 4.485728000000e+01 0.000000000000e+00 7.215377000000e+02 1.728540000000e+02 2.163791000000e-01 0.000000000000e+00 0.000000000000e+00 1.000000000000e+00 2.745884000000e-03
@@ -330,7 +330,7 @@ Tr_imu_to_velo: 9.999976000000e-01 7.553071000000e-04 -2.035826000000e-03 -8.086
 ```
 Note that we get a left and right projection matrix:
 
-```
+```python
 Left P Matrix
 [[     721.54           0      609.56      44.857]
  [          0      721.54      172.85     0.21638]
@@ -356,7 +356,13 @@ IMU to Velodyne Matrix
  [ -0.0007854     0.99989   -0.014823     0.31956]
  [  0.0020244    0.014825     0.99989    -0.79972]]
 ```
-Next
+Next, we need to extract the **Intrinsic Matrix** and the **Rotation Matrix** from our **Projection Matrix**. Recall from the equation below:
+
+<div align="center">
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/e9586b9d-b047-48ba-83df-7efaebb6e4eb"/>
+</div>
+
+We will use OpenCV's ```decomposeProjectionMatrix``` function for that:
 
 ```python
 def decompose_projection_matrix(projection_matrix):
@@ -382,8 +388,154 @@ def decompose_projection_matrix(projection_matrix):
     return camera_matrix, rotation_matrix, translation_vector
 ```
 
+Below is what we get:
+
+```python
+Camera Matrix Left:
+[[     721.54           0      609.56]
+ [          0      721.54      172.85]
+ [          0           0           1]]
+
+Rotation Matrix Left:
+[[          1           0           0]
+ [          0           1           0]
+ [          0           0           1]]
+
+Translation Vector Left:
+[[  -0.059849]
+ [ 0.00035793]
+ [ -0.0027459]
+ [          1]]
+
+Camera Matrix Right:
+[[     721.54           0      609.56]
+ [          0      721.54      172.85]
+ [          0           0           1]]
+
+Rotation Matrix Right:
+[[          1           0           0]
+ [          0           1           0]
+ [          0           0           1]]
+
+Translation Vector Right:
+[[    0.47286]
+ [  -0.002395]
+ [ -0.0027299]
+ [          1]]
+```
+
+We need to extract the **Focal Length** from the **Intrinsic Matrix** and calculate the **baseline** from the **translation vectors** as such:
+
+```python
+    # Extract the focal length and baseline
+    focal_length_x = camera_matrix_right[0, 0]
+    focal_length_y = camera_matrix_right[1, 1]
+    baseline = abs(translation_vector_left[0] - translation_vector_right[0])
+```
+
+Output:
+
+```python
+Focal Length (x-direction): 721.5377
+
+Focal Length (y-direction): 721.5377
+
+Baseline: [    0.53271] 
+```
+
+Observe the baseline is ```0.53271``` m same as on the configuration on the autonomous car.
+
+
 ### 4.2 Extract Labels
 
+We get a label file for each pair of images. Below is our label.txt file with each object having 15 values. 
+```python
+Car 0.00 0 -1.56 564.62 174.59 616.43 224.74 1.61 1.66 3.20 -0.69 1.69 25.01 -1.59
+Car 0.00 0 1.71 481.59 180.09 512.55 202.42 1.40 1.51 3.70 -7.43 1.88 47.55 1.55
+Car 0.00 0 1.64 542.05 175.55 565.27 193.79 1.46 1.66 4.05 -4.71 1.71 60.52 1.56
+Cyclist 0.00 0 1.89 330.60 176.09 355.61 213.60 1.72 0.50 1.95 -12.63 1.88 34.09 1.54
+DontCare -1 -1 -10 753.33 164.32 798.00 186.74 -1 -1 -1 -1000 -1000 -1000 -10
+DontCare -1 -1 -10 738.50 171.32 753.27 184.42 -1 -1 -1 -1000 -1000 -1000 -10
+```
+
+```python
+#Values    Name      Description
+----------------------------------------------------------------------------
+   1    type         Describes the type of object: 'Car', 'Van', 'Truck',
+                     'Pedestrian', 'Person_sitting', 'Cyclist', 'Tram',
+                     'Misc' or 'DontCare'
+   1    truncated    Float from 0 (non-truncated) to 1 (truncated), where
+                     truncated refers to the object leaving image boundaries
+   1    occluded     Integer (0,1,2,3) indicating occlusion state:
+                     0 = fully visible, 1 = partly occluded
+                     2 = largely occluded, 3 = unknown
+   1    alpha        Observation angle of object, ranging [-pi..pi]
+   4    bbox         2D bounding box of object in the image (0-based index):
+                     contains left, top, right, bottom pixel coordinates
+   3    dimensions   3D object dimensions: height, width, length (in meters)
+   3    location     3D object location x,y,z in camera coordinates (in meters)
+   1    rotation_y   Rotation ry around Y-axis in camera coordinates [-pi..pi]
+   1    score        Only for results: Float, indicating confidence in
+                     detection, needed for p/r curves, higher is better.
+```
+Credit to [DarylClimb](https://github.com/darylclimb/cvml_project/tree/master/projections/lidar_camera_projection/data) for this explanation.
+
+Note that ```DontCare``` labels denote regions in which objects have not been labeled, for example, because they have been too far away from the laser scanner. We need to extract the bounding box coordinates and the distance of each object from the labels. We will compare them with the ground truth.
+
+```python
+def ground_truth_bbox(labels_file, object_class):
+    lines = labels_file.split('\n')  # Split the input string into lines
+    bounding_boxes = []
+
+    for line in lines:
+        line = line.strip()  # Remove leading/trailing whitespace
+
+        if line:
+            data = line.split()
+
+            # Extract relevant values for each object
+            obj_type = data[0]
+            #print(obj_type)
+            truncated = float(data[1])
+            occluded = int(data[2])
+            alpha = float(data[3])
+            bbox = [float(val) for val in data[4:8]]
+            dimensions = [float(val) for val in data[8:11]]
+            location = [float(val) for val in data[11:14]]
+            distance = float(data[13])
+            rotation_y = float(data[14])
+
+            if obj_type in object_class:  # Check if obj_type is in the desired classes
+                # Append bounding box dimensions and distance to the list
+                bounding_boxes.append((bbox, distance))
+
+                # Print the 3D bounding box information
+                print("Object Type:", obj_type)
+                print("Truncated:", truncated)
+                print("Occluded:", occluded)
+                print("Alpha:", alpha)
+                print("Bounding Box:", bbox)
+                print("Dimensions:", dimensions)
+                print("Location:", location)
+                print("True Distance:", distance)
+                print("Rotation Y:", rotation_y)
+                print("------------------------")
+    return bounding_boxes
+```
+
+Output:
+
+```python
+Object Type: Car
+Truncated: 0.0
+Occluded: 0
+Alpha: 1.71
+Bounding Box: [481.59, 180.09, 512.55, 202.42]
+Dimensions: [1.4, 1.51, 3.7]
+Location: [-7.43, 1.88, 47.55]
+True Distance: 47.55 
+Rotation Y: 1.55
+```
 
 ### 4.3 Display Left and Right Images
 
