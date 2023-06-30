@@ -598,8 +598,8 @@ def compute_disparity(left_img, right_img, num_disparities=6 * 16, block_size=11
 Observe how the disparity using Block Matching is noisier than SGBM. We will use the SGBM algorithm from now on.
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/bb3a6e01-b584-4c8b-b62c-fb3c09877c51" width="500" height="250"/> 
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/27d0eb33-9c5c-42b5-bbf4-ac9efdbe0da1" width="500" height="250"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/bb3a6e01-b584-4c8b-b62c-fb3c09877c51" width="450" height="250"/> 
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/27d0eb33-9c5c-42b5-bbf4-ac9efdbe0da1" width="450" height="250"/>
 </div>
 
 
