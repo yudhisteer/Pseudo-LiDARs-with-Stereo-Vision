@@ -823,15 +823,15 @@ We can also compare our prediction of distances with the ```ground truth```. The
 
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/583c0a6c-0267-4b9a-9056-1159dd8ebe6f" width="400" height="250"/> 
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/341622d5-ce3d-4bb6-83b1-1a735729837e" width="400" height="250"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/583c0a6c-0267-4b9a-9056-1159dd8ebe6f" width="400" height="180"/> 
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/341622d5-ce3d-4bb6-83b1-1a735729837e" width="400" height="180"/>
 </div>
 
 In this example, we have a difference of ```0.61 m```.
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/a62203a0-e214-477f-b163-4c16a69680a2" width="400" height="250"/>
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/cfbff31d-d8cf-44d7-8036-da7f20c474e0" width="400" height="250"/> 
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/a62203a0-e214-477f-b163-4c16a69680a2" width="400" height="180"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/cfbff31d-d8cf-44d7-8036-da7f20c474e0" width="400" height="180"/> 
 </div>
 
 
