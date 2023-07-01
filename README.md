@@ -10,14 +10,15 @@ This project presents an economical alternative to LiDAR sensors for ```per-pixe
 For this project, the [KITTI dataset](https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) will be utilized, specifically the stereo camera images. The dataset includes a comprehensive [3D object detection benchmark](https://www.cvlibs.net/datasets/kitti/raw_data.php), comprising ```7,481``` training images and ```7,518``` test images. These images are accompanied by corresponding point clouds, providing a total of ```80,256``` labeled objects for analysis. Additionally, the ```synchronized and rectified raw data``` from the KITTI dataset will be employed during the **inference** stage of the project, further enhancing the accuracy and reliability of the results. The availability of this rich dataset enables thorough exploration and evaluation of the proposed methods and ensures robustness in the project's findings.
 
 ## Plan of Action
-1. Linear Camera Model
-2. Intrinsic and Extrinsic Parameters
-3. Simple Stereo
-4. Application of Simple Stereo
+1. [Linear Camera Model](#lcm)
+2. [Intrinsic and Extrinsic Parameters](#ie)
+3. [Simple Stereo](#ss)
+4. [Application of Simple Stereo](#ass)
 
 
 ------------------
 
+<a name="lcm"></a>
 ## 1. Linear Camera Model
 Before proceeding, we need to develop a method to estimate the camera's internal and external parameters accurately. This requires creating a linear camera model, which simplifies the estimation process compared to nonlinear models.
 
@@ -201,6 +202,7 @@ Hence, if we wish to calibrate the camera, all we need to know is the **projecti
 
 ----
 
+<a name="ie"></a>
 ## 2. Intrinsic and Extrinsic Parameters
 By employing our calibration method, we are able to achieve a precise estimation of the projection matrix. we can also go beyond this step by decomposing the projection matrix into its constituent parts: the ```intrinsic matrix```, encompassing all ```internal parameters```, and the ```extrinsic matrix```, which captures the ```external parameters``` of the camera.
 
@@ -231,6 +233,7 @@ Note that pinholes do not exhibit distortions but lenses do. We may encounter **
 
 --------------- 
 
+<a name="ss"></a>
 ## 3. Simple Stereo
 Now we want to recover a 3-Dimensional structure of a scene from two images. Before we dive into this, let's ask ourselves, given a calibrated camera, can we find the 3D scene point from a sinple 2D image? The answer is **no**. But we do know that the corresponding 3D point must lie on an ```outgoing ray``` shown in green and given that the camera is calibrated, we know the equation of this ray.
 
@@ -305,6 +308,7 @@ In order to get a good stereo matching, we want to avoid the following:
 
 ------------
 
+<a name="ass"></a>
 ## 4. Application of Simple Stereo
 Now we will try to find the distances of objects using the KITTI Dataset. For that, we first need to know the configuration of the cameras on the autonomous car. Thankfully, we have a  very detailed explanation describing the position and the baseline between the cameras as shown below.
 
