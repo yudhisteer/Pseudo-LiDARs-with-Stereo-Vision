@@ -363,7 +363,7 @@ IMU to Velodyne Matrix
  [ -0.0007854     0.99989   -0.014823     0.31956]
  [  0.0020244    0.014825     0.99989    -0.79972]]
 ```
-Next, we need to extract the **Intrinsic Matrix** and the **Rotation Matrix** from our **Projection Matrix**. Recall from the equation below:
+Next, we need to extract the **Intrinsic Matrix** and the **Extrinsic Matrix** from our **Projection Matrix**. Recall from the equation below:
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/e9586b9d-b047-48ba-83df-7efaebb6e4eb"/>
@@ -430,8 +430,7 @@ Translation Vector Right:
  [ -0.0027299]
  [          1]]
 ```
-
-We need to extract the **Focal Length** from the **Intrinsic Matrix** and calculate the **baseline** from the **translation vectors** as such:
+Observe how the Rotation Matrix is just an **Identity Matrix**. We need to extract the **Focal Length** from the **Intrinsic Matrix** and calculate the **baseline** from the **translation vectors** as such:
 
 ```python
     # Extract the focal length and baseline
