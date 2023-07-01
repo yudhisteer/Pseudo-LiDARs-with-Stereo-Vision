@@ -1,10 +1,13 @@
 # Pseudo-LiDARs and 3D Computer-Vision
 
 ## Problem Statement
+In the context of drone deliveries, it is crucial not only to detect obstacles in ```real-time``` but also to accurately determine their ```distances```. However, the implementation of traditional ```LiDAR``` sensors on drones poses a significant challenge due to their ```high cost``` and ```weight```. The expense and heaviness of LiDAR systems hinder their practicality for integration onto drones for ```obstacle detection``` and ```distance estimation``` purposes. Consequently, an alternative solution is needed to overcome these limitations and enable drones to ```avoid obstacles```, ```plan optimal paths```, and gain a comprehensive understanding of the surrounding environment. Addressing the problem of acquiring accurate obstacle distance measurements becomes essential in providing a cost-effective and lightweight alternative to LiDAR sensors, ensuring the safe and efficient implementation of drone deliveries.
 
 ## Abstract
+This project presents an economical alternative to LiDAR sensors for ```per-pixel depth estimation``` in drone applications. By utilizing ```block matching``` and ```Semi-Global Block Matching (SGBM)``` algorithms, we showcase how stereo computer vision techniques can accurately determine depth information. The block matching algorithm efficiently establishes ```correspondences``` between stereo camera images, while the SGBM algorithm optimizes the ```disparity map``` estimation process. Extensive experimentation validates the efficacy of this approach, demonstrating its capacity to provide per-pixel depth estimation at a significantly reduced ```cost``` compared to traditional LiDAR systems. Our findings indicate that the integration of ```pseudo-LiDAR``` systems presents a promising and cost-effective solution for replacing LiDAR sensors in drone applications, facilitating affordable depth perception and expanding the possibilities for aerial data collection and analysis.
 
 ## Dataset
+For this project, the [KITTI dataset](https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) will be utilized, specifically the stereo camera images. The dataset includes a comprehensive [3D object detection benchmark](https://www.cvlibs.net/datasets/kitti/raw_data.php), comprising ```7,481``` training images and ```7,518``` test images. These images are accompanied by corresponding point clouds, providing a total of ```80,256``` labeled objects for analysis. Additionally, the ```synchronized and rectified raw data``` from the KITTI dataset will be employed during the **inference** stage of the project, further enhancing the accuracy and reliability of the results. The availability of this rich dataset enables thorough exploration and evaluation of the proposed methods and ensures robustness in the project's findings.
 
 ## Plan of Action
 1. Linear Camera Model
@@ -549,7 +552,7 @@ We start by displaying the right and left images of the KITTI dataset. Note that
 
 ### 4.4 Compute Disparity Map
 
-Next, we will use OpenCV's Block Matching function (```StereoBM_create```) and Semi-Global Block Matching function (```StereoSGBM_create```) to calculate the disparity. We will need to fine-tune some parameters: ```num_disparities```, ```block_size```, and ```window_size```.
+Next, we will use OpenCV's **Block Matching** function (```StereoBM_create```) and **Semi-Global Block Matching** function (```StereoSGBM_create```) to calculate the **disparity**. We will need to fine-tune some parameters: ```num_disparities```, ```block_size```, and ```window_size```.
 
 ```python
 def compute_disparity(left_img, right_img, num_disparities=6 * 16, block_size=11, window_size=6, matcher="stereo_sgbm", show_disparity=True):
@@ -605,7 +608,7 @@ Observe how the disparity using Block Matching is noisier than SGBM. We will use
 Note that we have a white strip on the left of the images as there are no features to match from the left image to the right image. This depends on the ```block_size``` parameter.
 
 ### 4.5 Compute Depth Map
-Next, we will use the disparity map to output a depth map. We will use the equation below:
+Next, we will use the **disparity map** to output a **depth map**. We will use the equation below:
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/751c24e2-6e8b-46af-9672-ec0fcbcd31da"/>
@@ -652,12 +655,12 @@ Our output is a depth map that outputs the depth of each pixel.
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/08cfd21b-68ee-4d1e-9f03-8ab48074a052" width=550" height="300"/>
 </div>
 
-Though we will not use the image of the depth map directly, we will use it to get the depth of objects using object detection.
+The depth map represents ```per-pixel depth estimation```. However, we are interested in getting the depth or distances of some specific obstacles such as cars or pedestrians. Hence, we will use an object detection algorithm in order to segment our depth map and get the distances of these objects only.
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/1f402ee7-fa2c-45ba-90d7-4be6de7ca684
 
 ### 4.6 Object Detection
-The next step is to use ```YOLOv8``` to detect objects in our frames. We want to get the coordinates of the bounding boxes
+The next step is to use ```YOLOv8``` to detect objects in our frames. We want to get the **coordinates** of the **bounding boxes**.
 
 ```python
 def get_bounding_box_center_frame(frame, model, names, object_class, show_output=True):
@@ -714,7 +717,9 @@ We decide to detect ```cars```, ```persons```, and ```bicycles``` only.
 
 
 ### 4.7 Distances with Object Detection
-Since now we have the bounding box coordinates and the depth map for each frame, we can use two pieces of data and extract the depth of each obstacle. We can the center of an obstacle by indexing the depth map using the center of the bounding boxes.
+Since now we have the **bounding box coordinates** and the **depth map** for each frame, we can use two pieces of data and extract the depth of each obstacle. 
+
+    We get the distance of an obstacle by indexing the depth map using the center of the bounding boxes.
 
 ```python
 def calculate_distance(bbox_coordinates, frame, depth_map, disparity_map, show_output=True):
@@ -803,14 +808,14 @@ def calculate_distance(bbox_coordinates, frame, depth_map, disparity_map, show_o
 
     return disparity_map_colored, frame_copy, depth_map_colored
 ```
-We drew the bounding boxes and the distance of the objects from the camera is displayed on top in meters.
+We draw the bounding boxes and the distance of the objects from the camera is displayed on top in meters.
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d5443417-552d-46cd-8fe4-2ea55146507b" width=750" height="550"/>
 </div>
 
 ### 4.8 Compare with Ground Truth
-We can also compare our prediction of distances with the ground truth. The image on the left is the ground truth whereas the image on the right is our prediction using SGBM. We still have a discrepancy of ```1.79```meters which is still a huge number when it comes to self-driving cars.
+We can also compare our prediction of distances with the ```ground truth```. The image on the left is the ground truth whereas the image on the right is our **prediction** using SGBM. We still have a discrepancy of ```0.41 m``` which is still a huge number when it comes to self-driving cars.
 
 
 <div align="center">
@@ -818,7 +823,7 @@ We can also compare our prediction of distances with the ground truth. The image
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/341622d5-ce3d-4bb6-83b1-1a735729837e" width="500" height="200"/>
 </div>
 
-In this example, we have a difference of only ```0.61 m``` which is much better. However, the results fluctuate depending on the situation.
+In this example, we have a difference of ```0.61 m```.
 
 <div align="center">
   <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/a62203a0-e214-477f-b163-4c16a69680a2" width="500" height="200"/>
@@ -828,7 +833,13 @@ In this example, we have a difference of only ```0.61 m``` which is much better.
 
 ### 4.9 Pipeline
 
-Finally, we want to create a ```pipeline``` function whereby we take in all the left and right images, calculate the disparity, create a depth map, run an object detection and display the distances with their bounding boxes.
+Finally, we want to create a ```pipeline``` function whereby:
+
+1. We take in all **left** and **right** images
+2. Calculate the **disparity**
+3. Create a **depth map**
+4. Run an **object detection**
+5. Display the **distances** with their **bounding boxes**.
 
 ```python
 def pipeline(left_image, right_image, object_class):
@@ -864,32 +875,35 @@ def pipeline(left_image, right_image, object_class):
 
 ```
 
-Below are these results:
+Below are the results:
 
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/f10614c9-8441-4789-b6dd-87c9be27d74c
 
 
-
-
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/5ae69b2a-a98e-4a7d-81dd-07c184ad6fd6
 
-
   
-
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d5ec731e-192b-4594-80b0-4ec5080de8ee
-
-
 
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/654c0d91-e491-4daa-aa58-b57f3f16833b
 
 
+## Conclusion
+In conclusion, while traditional techniques such as ```Local```, ```Global```, and ```Semi-Global Matching``` algorithms have been employed in this project, the utilization of Deep Learning provides alternative approaches to determining disparity. For example:
 
+- **MC-CNN**: an algorithm that uses Siamese Networks logic to find disparity
 
+- **PSM-Net**: an algorithm that uses Pyramids architectures
 
+- **AnyNet**: an algorithm optimized for mobile
 
+- **RAFT-Stereo**: an optical flow algorithm adapted to Stereo Vision
 
+- **CreStereo** which is compatible with the OAK-D camera
+
+By employing advanced neural networks architectures like MC-CNN, PSM-Net, AnyNet, RAFT-Stereo, and CreStereo, we can achieve more accurate and reliable depth maps, enabling UAVs to better perceive their surroundings. This improved distance estimation is crucial for obstacle detection during UAV package delivery operations. With precise depth perception, UAVs can effectively identify and locate obstacles such as buildings, trees, or other objects that may obstruct their flight path. By leveraging deep learning, UAVs can analyze real-time scenes, enabling them to make informed decisions and adjust their trajectory to avoid potential collisions or navigate complex environments safely.
 
 
 
