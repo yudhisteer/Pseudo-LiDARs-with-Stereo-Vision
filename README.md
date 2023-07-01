@@ -819,19 +819,19 @@ We draw the bounding boxes and the distance of the objects from the camera is di
 </div>
 
 ### 4.8 Compare with Ground Truth
-We can also compare our prediction of distances with the ```ground truth```. The image on the left is the ground truth whereas the image on the right is our **prediction** using SGBM. We still have a discrepancy of ```0.41 m``` which is still a huge number when it comes to self-driving cars.
+We can also compare our prediction of distances with the ```ground truth```. The image on the left(red) is the ground truth whereas the image on the right is our **prediction** using SGBM. We still have a discrepancy of ```0.41 m``` which is still a huge number when it comes to self-driving cars.
 
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/583c0a6c-0267-4b9a-9056-1159dd8ebe6f" width="500" height="200"/> 
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/341622d5-ce3d-4bb6-83b1-1a735729837e" width="500" height="200"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/583c0a6c-0267-4b9a-9056-1159dd8ebe6f" width="400" height="250"/> 
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/341622d5-ce3d-4bb6-83b1-1a735729837e" width="400" height="250"/>
 </div>
 
 In this example, we have a difference of ```0.61 m```.
 
 <div align="center">
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/a62203a0-e214-477f-b163-4c16a69680a2" width="500" height="200"/>
-  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/cfbff31d-d8cf-44d7-8036-da7f20c474e0" width="500" height="200"/> 
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/a62203a0-e214-477f-b163-4c16a69680a2" width="400" height="250"/>
+  <img src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/cfbff31d-d8cf-44d7-8036-da7f20c474e0" width="400" height="250"/> 
 </div>
 
 
