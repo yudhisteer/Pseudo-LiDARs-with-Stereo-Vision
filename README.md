@@ -930,3 +930,4 @@ By employing advanced neural networks architectures like MC-CNN, PSM-Net, AnyNet
 14. https://medium.com/swlh/camera-lidar-projection-navigating-between-2d-and-3d-911c78167a94
 15. https://www.mrt.kit.edu/z/publ/download/2013/GeigerAl2013IJRR.pdf
 16. https://www.youtube.com/watch?v=AYjgeaQR8uQ&ab_channel=SevensenseRobotics
+17. https://arxiv.org/pdf/2007.10743.pdf
