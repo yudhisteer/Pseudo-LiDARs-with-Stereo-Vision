@@ -890,18 +890,16 @@ Below are the results:
 </video>
 
 
-
 <video src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/5ae69b2a-a98e-4a7d-81dd-07c184ad6fd6" controls="controls" style="max-width: 730px;">
 </video>
 
-[![Watch the video](https://img.youtube.com/vi/wdoXpFy1jhg/maxresdefault.jpg)](https://youtu.be/wdoXpFy1jhg)
-
-
   
-https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d5ec731e-192b-4594-80b0-4ec5080de8ee
+<video src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d5ec731e-192b-4594-80b0-4ec5080de8ee" controls="controls" style="max-width: 730px;">
+</video>
 
 
-https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/654c0d91-e491-4daa-aa58-b57f3f16833b
+<video src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/654c0d91-e491-4daa-aa58-b57f3f16833b" controls="controls" style="max-width: 730px;">
+</video>
 
 
 ## Conclusion
