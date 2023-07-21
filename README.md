@@ -1,7 +1,7 @@
 # Pseudo-LiDARs with Stereo Vision
 
 
-[![Watch the video](https://img.youtube.com/vi/wdoXpFy1jhg/maxresdefault.jpg)](https://youtu.be/wdoXpFy1jhg)
+
 
 
 ## Problem Statement
@@ -886,10 +886,16 @@ def pipeline(left_image, right_image, object_class):
 Below are the results:
 
 
-https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/f10614c9-8441-4789-b6dd-87c9be27d74c
+<video src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/f10614c9-8441-4789-b6dd-87c9be27d74c" controls="controls" style="max-width: 730px;">
+</video>
 
 
-https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/5ae69b2a-a98e-4a7d-81dd-07c184ad6fd6
+
+<video src="https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/5ae69b2a-a98e-4a7d-81dd-07c184ad6fd6" controls="controls" style="max-width: 730px;">
+</video>
+
+[![Watch the video](https://img.youtube.com/vi/wdoXpFy1jhg/maxresdefault.jpg)](https://youtu.be/wdoXpFy1jhg)
+
 
   
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/d5ec731e-192b-4594-80b0-4ec5080de8ee
