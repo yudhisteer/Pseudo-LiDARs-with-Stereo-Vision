@@ -884,6 +884,10 @@ Below are the results:
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/f10614c9-8441-4789-b6dd-87c9be27d74c
 
+[![Video](https://img.youtube.com/vi/jXnoFqcAkQA/maxresdefault.jpg)](https://youtu.be/wdoXpFy1jhg)
+
+
+
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/5ae69b2a-a98e-4a7d-81dd-07c184ad6fd6
 
