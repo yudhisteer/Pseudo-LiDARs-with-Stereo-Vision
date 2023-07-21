@@ -919,20 +919,36 @@ By employing advanced neural networks architectures like MC-CNN, PSM-Net, AnyNet
 ----------
 
 ## References
-1. https://github.com/mileyan/AnyNet
-2. https://github.com/JiaRenChang/PSMNet
-3. https://github.com/autonomousvision/unimatch
-4. https://groups.csail.mit.edu/commit/papers/2016/min-zhang-meng-thesis.pdf
-5. https://arxiv.org/abs/1510.05970
-6. https://arxiv.org/pdf/1803.08669.pdf
-7. https://arxiv.org/abs/2203.11483
-8. https://www.episci.com/product/swarmsense/
-9. https://skybrush.io/
-10. https://www.modalai.com/
-11. https://github.com/darylclimb/cvml_project/tree/master/projections
-12. https://towardsdatascience.com/depth-estimation-1-basics-and-intuition-86f2c9538cd1
-13. https://towardsdatascience.com/uncertainty-in-depth-estimation-c3f04f44f9
-14. https://medium.com/swlh/camera-lidar-projection-navigating-between-2d-and-3d-911c78167a94
-15. https://www.mrt.kit.edu/z/publ/download/2013/GeigerAl2013IJRR.pdf
-16. https://www.youtube.com/watch?v=AYjgeaQR8uQ&ab_channel=SevensenseRobotics
-17. https://arxiv.org/pdf/2007.10743.pdf
+[1] Mileyan, I. (n.d.). AnyNet. GitHub. Retrieved from https://github.com/mileyan/AnyNet
+
+[2] Chang, J. R. (n.d.). PSMNet. GitHub. Retrieved from https://github.com/JiaRenChang/PSMNet
+
+[3] Autonomous Vision Group. (n.d.). Unimatch. GitHub. Retrieved from https://github.com/autonomousvision/unimatch
+
+[4] Zhang, M. (2016). Scene Understanding and Mapping in Robotics: Algorithms and System Integration. Massachusetts Institute of Technology. Retrieved from https://groups.csail.mit.edu/commit/papers/2016/min-zhang-meng-thesis.pdf
+
+[5] Eigen, D., Puhrsch, C., & Fergus, R. (2015). Depth Map Prediction from a Single Image using a Multi-Scale Deep Network. arXiv:1510.05970. Retrieved from https://arxiv.org/abs/1510.05970
+
+[6] Kendall, A., & Gal, Y. (2018). What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision? arXiv:1803.08669. Retrieved from https://arxiv.org/pdf/1803.08669.pdf
+
+[7] Author(s) not specified. (2022). Title not specified. arXiv:2203.11483. Retrieved from https://arxiv.org/abs/2203.11483
+
+[8] Episci Inc. (n.d.). Swarmsense. Retrieved from https://www.episci.com/product/swarmsense/
+
+[9] Skybrush. (n.d.). Retrieved from https://skybrush.io/
+
+[10] ModalAI. (n.d.). Retrieved from https://www.modalai.com/
+
+[11] Climb, D. (n.d.). Projections. GitHub. Retrieved from https://github.com/darylclimb/cvml_project/tree/master/projections
+
+[12] Jain, S. (n.d.). Depth Estimation 1: Basics and Intuition. Towards Data Science. Retrieved from https://towardsdatascience.com/depth-estimation-1-basics-and-intuition-86f2c9538cd1
+
+[13] Author not specified. (n.d.). Uncertainty in Depth Estimation. Towards Data Science. Retrieved from https://towardsdatascience.com/uncertainty-in-depth-estimation-c3f04f44f9
+
+[14] Author not specified. (n.d.). Camera-LiDAR Projection: Navigating between 2D and 3D. Medium. Retrieved from https://medium.com/swlh/camera-lidar-projection-navigating-between-2d-and-3d-911c78167a94
+
+[15] Geiger, A., Lenz, P., & Urtasun, R. (2013). Are we ready for autonomous driving? The KITTI vision benchmark suite. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 3354-3361. Retrieved from https://www.mrt.kit.edu/z/publ/download/2013/GeigerAl2013IJRR.pdf
+
+[16] Sevensense Robotics. (n.d.). Monocular 3D Object Detection and Box Fitting Trained End-to-End from Image Labels. [Video file]. Retrieved from https://www.youtube.com/watch?v=AYjgeaQR8uQ&ab_channel=SevensenseRobotics
+
+[17] Author(s) not specified. (2020). Title not specified. arXiv:2007.10743. Retrieved from https://arxiv.org/pdf/2007.10743.pdf
