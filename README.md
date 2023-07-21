@@ -1,5 +1,9 @@
 # Pseudo-LiDARs with Stereo Vision
 
+
+[![Watch the video](https://img.youtube.com/vi/wdoXpFy1jhg/maxresdefault.jpg)](https://youtu.be/wdoXpFy1jhg)
+
+
 ## Problem Statement
 In the context of drone deliveries, it is crucial not only to detect obstacles in ```real-time``` but also to accurately determine their ```distances```. However, the implementation of traditional ```LiDAR``` sensors on drones poses a significant challenge due to their ```high cost``` and ```weight```. The expense and heaviness of LiDAR systems hinder their practicality for integration onto drones for ```obstacle detection``` and ```distance estimation``` purposes. Consequently, an alternative solution is needed to overcome these limitations and enable drones to ```avoid obstacles```, ```plan optimal paths```, and gain a comprehensive understanding of the surrounding environment. Addressing the problem of acquiring accurate obstacle distance measurements becomes essential in providing a cost-effective and lightweight alternative to LiDAR sensors, ensuring the safe and efficient implementation of drone deliveries.
 
@@ -883,10 +887,6 @@ Below are the results:
 
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/f10614c9-8441-4789-b6dd-87c9be27d74c
-
-[![Video](https://img.youtube.com/vi/jXnoFqcAkQA/maxresdefault.jpg)](https://youtu.be/wdoXpFy1jhg)
-
-
 
 
 https://github.com/yudhisteer/Pseudo-LiDARs-and-3D-Computer-Vision/assets/59663734/5ae69b2a-a98e-4a7d-81dd-07c184ad6fd6
