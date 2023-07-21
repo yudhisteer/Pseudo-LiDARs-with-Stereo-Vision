@@ -919,7 +919,7 @@ By employing advanced neural networks architectures like MC-CNN, PSM-Net, AnyNet
 ----------
 
 ## References
-[1] Mileyan, I. (n.d.). AnyNet. GitHub. Retrieved from https://github.com/mileyan/AnyNet
+[1] Mileyan, I. (n.d.). AnyNet. GitHub. [https://github.com/mileyan/AnyNet](https://github.com/mileyan/AnyNet)
 
 [2] Chang, J. R. (n.d.). PSMNet. GitHub. Retrieved from https://github.com/JiaRenChang/PSMNet
 
